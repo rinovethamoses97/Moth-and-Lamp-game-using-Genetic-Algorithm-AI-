@@ -8,7 +8,7 @@ var generations=0;
 var pool=[];
 var mutationRate=0.01;
 var bestPopulation;
-var bestScore;
+var bestScore=0;
 var gamestatus=0;
 function setup(){
 	createCanvas(800,600);
@@ -174,15 +174,20 @@ function draw(){
 			target.y=10;
 		}
 		else if(gamestatus==1){
-			alert("Won");
+			gamestatus=2;
 		}
+	}
+	fill(255);
+	text("Best Score= "+bestScore,0,10);
+	text("Generations= "+generations,0,30);
+	if(gamestatus==2){
+		fill(0,255,0);
+		text("Won",0,50);
 	}
 	if(alldead()){
 		generations++;
 		calculateFitness();	
 		findbest();
-		document.getElementById("bestscore").innerHTML="Best Score= "+bestScore;
-		document.getElementById("generations").innerHTML="Generations= "+generations;
 		console.log("Best Score= "+bestScore);
 		naturalSelection();
 		if(generations%2==0){

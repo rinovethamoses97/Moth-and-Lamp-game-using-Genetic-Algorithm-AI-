@@ -43,12 +43,9 @@ function alldead(){
 }
 function evaluate(){
 	for(var i=0;i<populationSize;i++){
-		if((population[i].pos.x+(10)>=target.x && population[i].pos.x+(10)<=target.x+(10)) && (population[i].pos.y+(10)>=target.y && population[i].pos.y+(10)<=target.y+(10))){
-    		return true;
-    	}
-    	else if((population[i].pos.x>=target.x && population[i].pos.x<=target.x+(10))&&(population[i].pos.y>=target.y && population[i].pos.y<=target.y+(10))){
-    		return true;
-   		}		
+		if(collideRectRect(population[i].pos.x,population[i].pos.y,10,10,target.x,target.y,10,10)){
+			return true;
+		}		
 	}
 	return false;
 }
@@ -131,15 +128,16 @@ function naturalSelection(){
 		population[i]=child;
 	}
 }
-function collisioncheck(x,y){
-	if((x+(10)>=obstacle.x && x+(10)<=obstacle.x+(600)) && (y+(10)>=obstacle.y && y+(10)<=obstacle.y+(10))){
-    	return true;
-    }
-    else if((x>=obstacle.x && x<=obstacle.x+(600))&&(y>=obstacle.y && y<=obstacle.y+(10))){
-    	return true;
-    }
-    return false;
-}
+// Replaced by p5.js collision detection libarary
+// function collisioncheck(x,y){
+// 	if((x+(10)>=obstacle.x && x+(10)<=obstacle.x+(600)) && (y+(10)>=obstacle.y && y+(10)<=obstacle.y+(10))){
+//     	return true;
+//     }
+//     else if((x>=obstacle.x && x<=obstacle.x+(600))&&(y>=obstacle.y && y<=obstacle.y+(10))){
+//     	return true;
+//     }
+//     return false;
+// }
 function draw(){
 	
 	background(0);
@@ -153,7 +151,7 @@ function draw(){
 			if(population[i].pos.x+population[i].gene[step].x<0 ||population[i].pos.x+population[i].gene[step].x>790 ||population[i].pos.y+population[i].gene[step].y>590|| population[i].pos.y+population[i].gene[step].y<0){
 				population[i].dead=true;
 			}
-			if(collisioncheck(population[i].pos.x+population[i].gene[step].x,population[i].pos.y+population[i].gene[step].y)){
+			if(collideRectRect(population[i].pos.x+population[i].gene[step].x,population[i].pos.y+population[i].gene[step].y,10,10,obstacle.x,obstacle.y,600,10)){
 				population[i].dead=true;
 				population[i].deadbyobstacle=true;
 			}

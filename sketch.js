@@ -151,10 +151,7 @@ function draw(){
 	fill(255,0,0);
 	for(var i=0;i<populationSize;i++){
 		if(!population[i].dead){
-			if(population[i].pos.x+population[i].gene[step].x<0 ||population[i].pos.x+population[i].gene[step].x>790 ||population[i].pos.y+population[i].gene[step].y>590|| population[i].pos.y+population[i].gene[step].y<0){
-				population[i].dead=true;
-			}
-			if(collideRectRect(population[i].pos.x+population[i].gene[step].x,population[i].pos.y+population[i].gene[step].y,10,10,obstacle.x,obstacle.y,600,10)){
+			if(population[i].pos.x+population[i].gene[step].x<0 ||population[i].pos.x+population[i].gene[step].x>790 ||population[i].pos.y+population[i].gene[step].y>590|| population[i].pos.y+population[i].gene[step].y<0||collideRectRect(population[i].pos.x+population[i].gene[step].x,population[i].pos.y+population[i].gene[step].y,10,10,obstacle.x,obstacle.y,600,10)){
 				population[i].dead=true;
 				population[i].deadbyobstacle=true;
 			}
